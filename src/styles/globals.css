@@ -19,3 +19,13 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.xl-type {
+  font-size: 16rem;
+}
+
+@media (max-width: 768px) {
+  .xl-type {
+    font-size: 8rem;
+  }
+}
