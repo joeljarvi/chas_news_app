@@ -3,6 +3,9 @@ import Link from "next/link";
 
 export default function Home() {
   const [randomDogImage, setRandomDogImage] = useState(null);
+  const [randomLoveImage, setRandomLoveImage] = useState(null);
+  const [randomDoImage, setRandomDoImage] = useState(null);
+  const [randomYouImage, setRandomYouImage] = useState(null);
   const [dogList, setDogList] = useState([]);
   const [mounted, setMounted] = useState(false);
 
@@ -12,6 +15,24 @@ export default function Home() {
     setRandomDogImage(data.message);
   }
 
+  async function getRandomLove() {
+    const response = await fetch("https://dog.ceo/api/breeds/image/random");
+    const data = await response.json();
+    setRandomLoveImage(data.message);
+  }
+
+  async function getRandomDo() {
+    const response = await fetch("https://dog.ceo/api/breeds/image/random");
+    const data = await response.json();
+    setRandomDoImage(data.message);
+  }
+
+  async function getRandomYou() {
+    const response = await fetch("https://dog.ceo/api/breeds/image/random");
+    const data = await response.json();
+    setRandomYouImage(data.message);
+  }
+
   async function getDogList() {
     const response = await fetch("https://dog.ceo/api/breeds/list/all");
     const data = await response.json();
@@ -19,7 +40,11 @@ export default function Home() {
   }
 
   useEffect(() => {
+    getRandomDo();
+    getRandomYou();
+    getRandomLove();
     getRandomDog();
+
     getDogList();
     setMounted(true);
   }, []);
@@ -29,59 +54,95 @@ export default function Home() {
   }
 
   return (
-    <div className="w-screen h-screen">
-      <div className="fixed top-0 left-0 z-20 text-pink-400 mix-blend-difference px-4 pt-4 lg:pt-8 lg:px-8 w-full">
-        <div className="flex flex-row justify-between">
-          <h2 className="font-thin text-xl lg:text-4xl w-1/2">
-            This is a website devoted to{" "}
-            <strong className="font-black tracking-tight">dog lovers</strong>,
-            please leave if you are a{" "}
-            <strong className="font-black tracking-tight">cat person...</strong>
-          </h2>
-          <Link href="/">
-            <h2 className="font-thin text-xl text-left lg:text-4xl lg:text-right">
-              DOG<strong className="font-black tracking-tight">INDEX</strong>
-            </h2>
-          </Link>
+    <div className="w-screen h-screen flex flex-col gap-y-4">
+      {dogList.length > 0 ? (
+        <div>
+          <ul className="w-full grid grid-cols-1 lg:grid-cols-2">
+            {dogList.map((breed, index) => (
+              <Link href={`dogPages/${breed}`} key={index}>
+                <li
+                  className={`text-4xl tracking-tight leading-tight cursor-pointer font-black text-center uppercase px-16 text-black ${
+                    index % 2 === 0 ? "bg-white" : "bg-white"
+                  }`}
+                >
+                  {breed}
+                </li>
+              </Link>
+            ))}
+          </ul>
         </div>
-      </div>
-      <section className="w-full flex flex-col items-center justify-center  bg-pink-400">
-        {dogList.length > 0 ? (
-          <div>
-            <ul className="pt-28 lg:pt-36 px-8 pb-8 h-fit w-full">
-              {dogList.map((breed, index) => (
-                <Link href={`dogPages/${breed}`} key={index}>
-                  <li className="text-5xl lg:text-9xl leading-tighter font-black text-center hover:mix-blend-difference cursor-pointer">
-                    {breed}
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <p>Loading breed list...</p>
-        )}
-        <span className="flex flex-row items-center justify-center bg-green-500 px-8 gap-2 lg:h-96 w-full">
-          <h1 className="m-0 xl-type font-black tracking-tight">D</h1>
+      ) : (
+        <p>Loading breed list...</p>
+      )}
+      <div className="bg-red-600 px-4 pt-4 pb-6 flex flex-col lg:flex-row items-start justify-center lg:justify-start lg:items-start lg:px-12 lg:flex-wrap w-full min-h-screen xl-type tracking-tight overflow-hidden">
+        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2 lg:justify-end lg:pr-16">
+          <h1 className="mt-1 lg:mt-0.5">D</h1>
+          {randomDoImage ? (
+            <div>
+              <img
+                src={randomDoImage}
+                alt="Random Love Dog"
+                className="max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full mt-14 lg:mt-24"
+                onClick={getRandomDo}
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </span>
+        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2">
+          <h1 className="mt-3 lg:mt-0">Y</h1>
+          {randomYouImage ? (
+            <div>
+              <img
+                src={randomYouImage}
+                alt="Random Dog"
+                className="max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full mt-16 lg:mt-24 lg:-ml-2"
+                onClick={getRandomYou}
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )}
+          <h1 className=" mt-3 lg:mt-0 -ml-1">U</h1>
+        </span>
+        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2">
+          <h1 className="mt-3.5 lg:mt-1">L</h1>
+          {randomLoveImage ? (
+            <div>
+              <img
+                src={randomLoveImage}
+                alt="Random Love Dog"
+                className="max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full mt-16 lg:mt-24"
+                onClick={getRandomLove}
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )}
+          <h1 className="-ml-1 mt-3.5 lg:mt-1">VE</h1>
+        </span>
+        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2">
+          <h1 className="mt-3 lg:mt-1">D</h1>
           {randomDogImage ? (
             <div>
               <img
                 src={randomDogImage}
                 alt="Random Dog"
-                className="m-0 h-32 lg:h-96  cursor-pointer hover:shadow-xl"
+                className="max-h-24 lg:max-h-40 min-w-44 cursor-pointer hover:shadow-xl rounded-full mt-16 lg:mt-24"
                 onClick={getRandomDog}
                 loading="lazy"
               />
             </div>
           ) : (
             <p>Loading...</p>
-          )}{" "}
-          <h1 className="xl-type font-black tracking-tight -ml-1">GS</h1>
+          )}
+          <h1 className="mt-3 lg:mt-1 -ml-1">GS</h1>
         </span>
-      </section>
-      {/* <footer className="w-full px-8 pt-6 pb-6 bg-orange-800">
-        <h3 className="text-2xl font-black">2025</h3>
-      </footer> */}
+      </div>
     </div>
   );
 }
