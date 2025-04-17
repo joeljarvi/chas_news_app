@@ -74,48 +74,50 @@ export default function Home() {
       ) : (
         <p>Loading breed list...</p>
       )}
-      <div className="bg-red-600 px-4 pt-4 pb-6 flex flex-col lg:flex-row items-start justify-center lg:justify-start lg:items-start lg:px-12 lg:flex-wrap w-full min-h-screen xl-type tracking-tight overflow-hidden">
-        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2 lg:justify-end lg:pr-16">
-          <h1 className="mt-1 lg:mt-0.5">D</h1>
-          {randomDoImage ? (
-            <div>
-              <img
-                src={randomDoImage}
-                alt="Random Love Dog"
-                className="max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full mt-14 lg:mt-24"
-                onClick={getRandomDo}
-                loading="lazy"
-              />
-            </div>
-          ) : (
-            <p>Loading...</p>
-          )}
+      <div className="bg-red-600 px-4 pb-2 flex flex-col items-center justify-end lg:items-center lg:justify-center lg:p-8 w-full min-h-screen xl-type tracking-tight overflow-hidden">
+        <span className="w-full flex flex-col items-center justify-center lg:flex-row">
+          <span className="w-full flex flex-row items-center justify-start gap-x-2 lg:justify-center  lg:items-center ">
+            <h1 className="leading-none">D</h1>
+            {randomDoImage ? (
+              <div>
+                <img
+                  src={randomDoImage}
+                  alt="Random Love Dog"
+                  className="mt-2 max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full"
+                  onClick={getRandomDo}
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </span>
+          <span className="w-full flex flex-row items-center justify-start gap-x-2 lg:justify-center lg:items-center ">
+            <h1 className="leading-none">Y</h1>
+            {randomYouImage ? (
+              <div>
+                <img
+                  src={randomYouImage}
+                  alt="Random Dog"
+                  className="mt-2 max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full"
+                  onClick={getRandomYou}
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
+            <h1 className="leading-none">U</h1>
+          </span>
         </span>
-        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2">
-          <h1 className="mt-3 lg:mt-0">Y</h1>
-          {randomYouImage ? (
-            <div>
-              <img
-                src={randomYouImage}
-                alt="Random Dog"
-                className="max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full mt-16 lg:mt-24 lg:-ml-2"
-                onClick={getRandomYou}
-                loading="lazy"
-              />
-            </div>
-          ) : (
-            <p>Loading...</p>
-          )}
-          <h1 className=" mt-3 lg:mt-0 -ml-1">U</h1>
-        </span>
-        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2">
-          <h1 className="mt-3.5 lg:mt-1">L</h1>
+        <span className="w-full flex flex-row items-center justify-start gap-x-2 lg:justify-center  lg:items-center ">
+          <h1 className="leading-none">L</h1>
           {randomLoveImage ? (
             <div>
               <img
                 src={randomLoveImage}
                 alt="Random Love Dog"
-                className="max-h-24 lg:max-h-40 cursor-pointer hover:shadow-xl rounded-full mt-16 lg:mt-24"
+                className="mt-2 max-h-24  lg:max-h-40  cursor-pointer hover:shadow-xl rounded-full"
                 onClick={getRandomLove}
                 loading="lazy"
               />
@@ -123,16 +125,16 @@ export default function Home() {
           ) : (
             <p>Loading...</p>
           )}
-          <h1 className="-ml-1 mt-3.5 lg:mt-1">VE</h1>
+          <h1 className="leading-none ">VE</h1>
         </span>
-        <span className="w-full lg:w-1/2 flex flex-row items-start justify-start gap-x-2">
-          <h1 className="mt-3 lg:mt-1">D</h1>
+        <span className="w-full flex flex-row items-center justify-start gap-x-2 lg:justify-center  lg:items-center ">
+          <h1 className="leading-none">D</h1>
           {randomDogImage ? (
             <div>
               <img
                 src={randomDogImage}
                 alt="Random Dog"
-                className="max-h-24 lg:max-h-40 min-w-44 cursor-pointer hover:shadow-xl rounded-full mt-16 lg:mt-24"
+                className="mt-2 max-h-24 lg:max-h-40  cursor-pointer hover:shadow-xl rounded-full"
                 onClick={getRandomDog}
                 loading="lazy"
               />
@@ -140,7 +142,8 @@ export default function Home() {
           ) : (
             <p>Loading...</p>
           )}
-          <h1 className="mt-3 lg:mt-1 -ml-1">GS</h1>
+          <h1 className="leading-none">GS</h1>
+          <h1 className="leading-none">??</h1>
         </span>
       </div>
     </div>
